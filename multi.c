@@ -142,4 +142,24 @@ int main() {
     obj4->data = "Exit triggered by ID4";
 
     // Register instances
-    getset_class(obj1,_
+    getset_class(obj1, NULL);
+    getset_class(obj2, NULL);
+    getset_class(obj3, NULL);
+    getset_class(obj4, NULL);
+
+    // Setup signal handlers
+    signal(SIGUSR1, handle_signal);
+    signal(SIGUSR2, handle_signal);
+    signal(SIGINT, handle_signal);
+    signal(SIGHUP, handle_signal);
+
+    printf("Program running. PID: %d\n", getpid());
+    printf("Send signals (SIGUSR1, SIGUSR2, SIGINT, SIGHUP) to interact.\n");
+
+    // Main loop
+    while (1) {
+        pause(); // Wait for signals
+    }
+
+    return 0;
+}
